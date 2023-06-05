@@ -1,0 +1,7 @@
+env/
+.vscode/
+post.txt
+db.sqlite3
+media/
+src/.env
+__pycache__

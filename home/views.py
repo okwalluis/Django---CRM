@@ -1,35 +1,33 @@
-from django import template
-from django.contrib.auth.decorators import login_required
-from django.http import HttpResponse, HttpResponseRedirect
-from django.template import loader
-from django.urls import reverse
 
+from django.shortcuts import render, redirect
+from django.contrib.auth import authenticate, login, logout
+from django.contrib import messages
 
-#@login_required(login_url="/login/")
-def index(request):
-    context = {'segment': 'index'}
-    html_template = loader.get_template('home/index.html')
-    return HttpResponse(html_template.render(context, request))
+def home(request):
+    #records = Record.objects.all()
+	# Check to see if logging in
+	if request.method == 'POST':
+		username = request.POST.get('username','')
+		password = request.POST.get('password','')
+		# Authenticate
+		user = authenticate(request, username=username, password=password)
+		if user is not None:
+			login(request, user)
+			messages.success(request, "Bienvenido!")
+			return redirect('home:home')
+		else:
+			messages.success(request, "Ha ocurrido un error!")
+			return redirect('home:home')
+	else:
+		return render(request, 'home.html', {'records':''})
 
-"""
-#@login_required(login_url="/login/")
-def pages(request):
-    context = {}
-    # All resource paths end in .html.
-    # Pick out the html file name from the url. And load that template.
-    try:
-        load_template = request.path.split('/')[-1]
-        if load_template == 'admin':
-            return HttpResponseRedirect(reverse('admin:index'))
-        context['segment'] = load_template
+#def login_user(request):
+#    pass
 
-        html_template = loader.get_template('home/' + load_template)
-        return HttpResponse(html_template.render(context, request))
-    except template.TemplateDoesNotExist:
-        html_template = loader.get_template('home/page-404.html')
-        return HttpResponse(html_template.render(context, request))
+def logout_user(request):
+    logout(request)
+    messages.success(request, 'Te has desconectado!')
+    return redirect('home:home')
 
-    except:
-        html_template = loader.get_template('home/page-500.html')
-        return HttpResponse(html_template.render(context, request))
-"""
+def register_user(request):
+	return render(request, 'register.html', {})

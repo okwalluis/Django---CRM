@@ -23,6 +23,7 @@ INSTALLED_APPS = [
     "personas.apps.PersonasConfig",
     "prestamos.apps.PrestamosConfig",
     "users.apps.UsersConfig",
+    "home.apps.HomeConfig",
     ##
     "django.contrib.admin",
     "django.contrib.auth",
