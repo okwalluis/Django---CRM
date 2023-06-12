@@ -1,64 +1,69 @@
 from django.shortcuts import render, get_object_or_404, redirect
-from django.views import View
-from .models import Persona, TipoPersona, Sexo
+from django.contrib import messages
+from .models import Persona
+from .forms import PersonaForm
 
 
-class PersonaView(View):
-    def get(self, request):
+def get_all(request):
+    if request.user.is_authenticated:
         personas = Persona.objects.all()
-        return render(request, 'personas/persona.html', {'personas': personas})
+        return render(request, 'person_list.html', {'personas': personas})
+    else:
+        messages.success(request, "Debes conectarte para visualizar la información")
+        return redirect('home:home')
 
+def get_person(request, pk):
+    if request.user.is_authenticated:
+        # Look Up Record
+        persona = get_object_or_404(Persona, id=pk)
+        if persona.sexo is not None:
+            sexo = persona.sexo.descripcion
+        else:
+            sexo = ''
+        if persona.tipo_persona is not None:
+            tipo = persona.tipo_persona.descripcion
+        else:
+            tipo = ''
+        return render(request, 'person.html', {'persona':persona, 'tipo':tipo, 'sexo':sexo})
+    else:
+        messages.success(request, "Debes conectarte para visualizar la información")
+        return redirect('home:home')
 
-def nuevo(request):
-    tipos = TipoPersona.objects.all()
-    sexos = Sexo.objects.all()
+def delete_person(request, pk):
+    if request.user.is_authenticated:
+        delete_it = get_object_or_404(Persona, id=pk)
+        delete_it.delete()
+        messages.success(request, "El registro fue borrado con éxito.")
+        return redirect('personas:get_all')
+    else:
+        messages.success(request, "Debes estar conectado.")
+        return redirect('home:home')
 
-    return render(
-        request,
-        template_name='personas/nuevo.html',
-        context={'titulo': 'Nuevo',
-                 'tipos': tipos,
-                 'lblsexo': 'Sexo',
-                 'sexos': sexos}
-    )
-
-
-def cancelar(request):
-    personas = Persona.objects.all()
-    return render(request, 'personas/persona.html', {'personas': personas})
-
-
-def borrar(request, pk):
-    persona = get_object_or_404(Persona, id=pk)
-    persona.delete()
-    return redirect('persona:personas')
-
-
-def crear(request):
-    if request.method == 'POST':
-        nombre = request.POST.get('nombre')
-        apellido = request.POST.get('apellido')
-        razon_social = request.POST.get('razonsocial')
-
-        # Suponiendo que 'tipo_persona' es el nombre del campo en el formulario
-        tipo_persona_id = request.POST.get('tipopersona')
-        tipo_persona = get_object_or_404(TipoPersona, id=tipo_persona_id)
-
-        sexo_id = request.POST.get('sexo')
-        sexo = get_object_or_404(Sexo, id=sexo_id)
-
-        es_cliente = 'escliente' in request.POST
-        es_proveedor = 'esproveedor' in request.POST
-
-        persona = Persona(nombre=nombre,
-                          apellido=apellido,
-                          razon_social=razon_social,
-                          tipo_persona=tipo_persona,
-                          sexo=sexo,
-                          es_cliente=es_cliente,
-                          es_proveedor=es_proveedor)
-        persona.save()
-        # Redirige a la página que muestra la lista de personas
-        return redirect('persona:personas')
-
-    return render(request, 'personas/persona.html')
+def add_person(request):
+    if request.user.is_authenticated:
+        if request.method == 'POST':
+            form = PersonaForm(request.POST)
+            if form.is_valid():
+                form.save()
+                messages.success(request, "Registro insertado con éxito!")
+                return redirect('personas:get_all')
+        else:
+            form = PersonaForm()
+        
+        return render(request, 'add_person.html', {'form': form})
+    else:
+        messages.success(request, "Debes estar conectado.")
+        return redirect('home:home')
+    
+def edit_person(request, pk):
+    if request.user.is_authenticated:
+        persona = get_object_or_404(Persona, id=pk)
+        form = PersonaForm(request.POST or None, instance=persona)
+        if form.is_valid():
+            form.save()
+            messages.success(request, "El registro fue editado con éxito.")
+            return redirect('personas:get_all')
+        return render(request, 'edit_person.html', {'form': form}) 
+    else:
+        messages.success(request, "Debes estar conectado.")
+        return redirect('home:home')

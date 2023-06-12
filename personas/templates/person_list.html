@@ -1,0 +1,38 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if personas %}
+<h1>Personas</h1>
+<div class="card-body">
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"> Nombre</th>
+                <th scope="col">Apellido</th>
+                <th scope="col">Tipo</th>
+                <th scope="col">Razón Social</th>
+                <th scope="col">Sexo</th>
+                <th scope="col"> ID</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for persona in personas %}
+            <tr>
+                <td>{{ persona.nombre }}</td>
+                <td>{{ persona.apellido }}</td>
+                <td>{{ persona.tipo_persona }}</td>
+                <td>{{ persona.razon_social }}</td>
+                <td>{{ persona.sexo }}</td>
+                <td><a href="{% url 'personas:get' persona.id %}">{{ persona.id }}</a></td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<p>No se ha encontrado ninguna información.</p>
+{% endif %}
+<a href="{% url 'personas:add' %}" class="btn btn-outline-primary">Nuevo</a>
+{% endblock %}

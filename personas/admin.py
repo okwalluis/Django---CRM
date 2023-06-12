@@ -2,7 +2,8 @@ from django.contrib import admin
 from .models import Persona, TipoPersona, Sexo, Direccion, Telefono
 
 class PersonaAdmin(admin.ModelAdmin):
-    fields = ["nombre", "apellido", "razon_social"]
+    fields = ["nombre", "apellido", 
+              "razon_social", "tipo_persona","sexo", "es_cliente", "es_proveedor"]
 
 class TipoPersonaAdmin(admin.ModelAdmin):
     fields = ["descripcion"]

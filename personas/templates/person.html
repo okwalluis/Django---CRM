@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <strong>
+            {{ persona.nombre }}
+            {{ persona.apellido }}
+        </strong>
+    </div>
+    <div class="card-body">
+        <br />
+        <div>
+            <p class="card-text">
+                <strong>Razón social: </strong>{{ persona.razon_social }}
+            </p>
+            <p class="card-text">
+                <strong>Tipo: </strong>{{ tipo}}
+            </p>
+            <p class="card-text">
+                <strong>Sexo: </strong>{{ sexo}}
+            </p>
+            <p class="card-text">
+                <strong>Es cliente: </strong>
+                {% if persona.es_cliente %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+            <p class="card-text">
+                <strong>Es proveedor: </strong>
+                {% if persona.es_proveedor %}
+                    Sí
+                {% else %}
+                    No
+                {% endif %}
+            </p>
+        </div>
+        <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+    </div>
+</div>
+
+<br /><br />
+<a href="{% url 'personas:get_all' %}" class="btn btn-outline-secondary">Volver</a>
+<a href="{% url 'personas:edit' persona.id %}" class="btn btn-outline-primary">Editar</a>
+<a href="{% url 'personas:delete' persona.id %}" class="btn btn-outline-danger">Borrar</a>
+{% endblock %}
