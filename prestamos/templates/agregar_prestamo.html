@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+    <h1>Nuevo Prestamo</h1>
+    <br/>
+    <form method="POST" action="{% url 'prestamos:agregar_prestamo' %}">
+        {% csrf_token %}
+        
+        {{form.as_p}}
+        <br/>
+        
+        <a href="{% url 'prestamos:listar_prestamos' %}" class="btn btn-outline-secondary">Volver</a>
+        <button type="submit" class="btn btn-outline-primary">Guardar</button>
+    </form>
+
+</div>
+
+
+{% endblock %}

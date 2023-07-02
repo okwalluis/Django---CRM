@@ -20,8 +20,10 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    "pagos.apps.PagosConfig",
     "personas.apps.PersonasConfig",
     "prestamos.apps.PrestamosConfig",
+    ##
     "users.apps.UsersConfig",
     "home.apps.HomeConfig",
     ##
@@ -111,7 +113,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-LANGUAGE_CODE = "en-us"
+#LANGUAGE_CODE = "en-us"
+LANGUAGE_CODE = 'es'
 
 TIME_ZONE = "America/Asuncion"
 

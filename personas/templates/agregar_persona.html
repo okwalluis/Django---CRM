@@ -3,18 +3,15 @@
 
 <div class="col-md-6 offset-md-3">
     <h1>Añadir persona</h1>
-    <br/>
-    <form method="POST" action="{% url 'personas:add' %}">
+    <br />
+    <form method="POST" action="{% url 'personas:agregar_persona' %}">
         {% csrf_token %}
-        
+
         {{form.as_p}}
-        <br/>
-        
-        <a href="{% url 'personas:get_all' %}" class="btn btn-outline-secondary">Volver</a>
+        <br />
+
+        <a href="{% url 'personas:listar_personas' %}" class="btn btn-outline-secondary">Volver</a>
         <button type="submit" class="btn btn-outline-primary">Añadir</button>
     </form>
-
 </div>
-
-
 {% endblock %}

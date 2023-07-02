@@ -14,13 +14,14 @@ class SexoForm(forms.ModelForm):
 class PersonaForm(forms.ModelForm):
     class Meta:
         model = Persona
-        fields = ['nombre', 'apellido', 'razon_social', 'tipo_persona', 'sexo', 'es_cliente', 'es_proveedor']
+        fields = ['nombre', 'apellido', 'razon_social', 'tipo_persona', 'sexo', 'fecha_nacimiento','es_cliente', 'es_proveedor']
         widgets = {
             'nombre': forms.TextInput(attrs={'type':'text','class': 'form-control', 'placeholder': 'Ingrese el nombre', 'name':'nombre'}),
             'apellido': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese el apellido'}),
             'razon_social': forms.TextInput(attrs={'class': 'form-control', 'placeholder': 'Ingrese la razón social'}),
             'tipo_persona': forms.Select(attrs={'class': 'form-control'}),
             'sexo': forms.Select(attrs={'class': 'form-control'}),
+            'fecha_nacimiento' : forms.TextInput(attrs={'type':'date', 'class': 'form-control', 'placeholder': 'Fecha de nacimiento'}),
             'es_cliente': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
             'es_proveedor': forms.CheckboxInput(attrs={'class': 'form-check-input'}),
         }

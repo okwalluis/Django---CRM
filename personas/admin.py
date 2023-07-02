@@ -3,7 +3,9 @@ from .models import Persona, TipoPersona, Sexo, Direccion, Telefono
 
 class PersonaAdmin(admin.ModelAdmin):
     fields = ["nombre", "apellido", 
-              "razon_social", "tipo_persona","sexo", "es_cliente", "es_proveedor"]
+              "razon_social", "tipo_persona",
+              "sexo", "fecha_nacimiento", 
+              "es_cliente", "es_proveedor"]
 
 class TipoPersonaAdmin(admin.ModelAdmin):
     fields = ["descripcion"]
@@ -15,7 +17,7 @@ class DireccionAdmin(admin.ModelAdmin):
     fields = ["descripcion"]
 
 class TelefonoAdmin(admin.ModelAdmin):
-    fields = ["numero"]
+    fields = ["persona","numero"]
 
 #admin.site.register(Question)
 #admin.site.register(Choice)

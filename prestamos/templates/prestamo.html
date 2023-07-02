@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<div class="card">
+    <div class="card-header">
+        <strong>
+            Nro. préstamo: {{ prestamo.nro_prestamo }}/{{ prestamo.persona.nombre }}
+        </strong>
+    </div>
+    <div class="card-body">
+        <br />
+        <div>
+            <p class="card-text"><strong>Fecha: </strong>{{prestamo.fecha|date:"d/m/Y"}}</p>
+            <p class="card-text"><strong>Sistema préstamo: </strong>{{ prestamo.sistema_prestamo}}</p>
+            <p class="card-text"><strong>Tipo préstamo: </strong>{{ prestamo.tipo_prestamo}}</p>
+            <p class="card-text"><strong>Capital: </strong>{{ prestamo.capital}}</p>
+            <p class="card-text"><strong>Interés: </strong>{{ prestamo.interes}}</p>
+            <p class="card-text"><strong>Estado: </strong>{{prestamo.estado_prestamo}}</p>
+
+        </div>
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <a href="{% url 'prestamos:listar_cuotas_por_id' prestamo.id %}" class="btn btn-outline-success  me-md-2">Ver Cuotas</a>
+        </div>
+
+    </div>
+</div>
+
+<br /><br />
+<a href="{% url 'prestamos:listar_prestamos' %}" class="btn btn-outline-secondary">Volver</a>
+<a href="{% url 'prestamos:editar_prestamo' prestamo.id %}" class="btn btn-outline-primary">Editar</a>
+
+<!--<a href="{% url 'prestamos:editar_prestamo' prestamo.id %}" class="btn btn-outline-danger">Borrar</a> -->
+
+{% endblock %}

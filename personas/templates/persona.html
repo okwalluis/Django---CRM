@@ -23,17 +23,17 @@
             <p class="card-text">
                 <strong>Es cliente: </strong>
                 {% if persona.es_cliente %}
-                    Sí
+                Sí
                 {% else %}
-                    No
+                No
                 {% endif %}
             </p>
             <p class="card-text">
                 <strong>Es proveedor: </strong>
                 {% if persona.es_proveedor %}
-                    Sí
+                Sí
                 {% else %}
-                    No
+                No
                 {% endif %}
             </p>
         </div>
@@ -42,7 +42,7 @@
 </div>
 
 <br /><br />
-<a href="{% url 'personas:get_all' %}" class="btn btn-outline-secondary">Volver</a>
-<a href="{% url 'personas:edit' persona.id %}" class="btn btn-outline-primary">Editar</a>
-<a href="{% url 'personas:delete' persona.id %}" class="btn btn-outline-danger">Borrar</a>
+<a href="{% url 'personas:listar_personas' %}" class="btn btn-outline-secondary">Volver</a>
+<a href="{% url 'personas:editar_persona' persona.id %}" class="btn btn-outline-primary">Editar</a>
+<a href="{% url 'personas:borrar_persona' persona.id %}" class="btn btn-outline-danger">Borrar</a>
 {% endblock %}

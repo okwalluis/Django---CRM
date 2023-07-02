@@ -10,7 +10,7 @@
         {% csrf_token %}
         {% if form.errors %}
         <div class="alert alert-warning alert-dismissible fade show" role="alert">
-            Your Form Has Errors
+            Ha ocurrido un error!
             {% for field in form %}
             {% if field.errors %}
             {{ field.errors }}
@@ -23,7 +23,7 @@
         {{ form.as_p }}
 
         <br />
-        <button type="submit" class="btn btn-secondary">Register</button>
+        <button type="submit" class="btn btn-secondary">Registrar</button>
     </form>
 
 

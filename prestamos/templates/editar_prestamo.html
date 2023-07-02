@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="col-md-6 offset-md-3">
+    <h1>Editar prestamo</h1>
+    <br />
+    <form method="POST">
+        {% csrf_token %}
+        {{form.as_p}}
+        <br />
+        <a href="{% url 'prestamos:listar_prestamos' %}" class="btn btn-outline-secondary">Volver</a>
+        <button type="submit" class="btn btn-outline-primary">Editar</button>
+    </form>
+</div>
+{% endblock %}

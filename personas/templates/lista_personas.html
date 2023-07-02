@@ -25,7 +25,7 @@
                 <td>{{ persona.tipo_persona }}</td>
                 <td>{{ persona.razon_social }}</td>
                 <td>{{ persona.sexo }}</td>
-                <td><a href="{% url 'personas:get' persona.id %}">{{ persona.id }}</a></td>
+                <td><a href="{% url 'personas:listar_persona_por_id' persona.id %}">{{ persona.id }}</a></td>
             </tr>
         </tbody>
         {% endfor %}
@@ -34,5 +34,5 @@
 {% else %}
 <p>No se ha encontrado ninguna información.</p>
 {% endif %}
-<a href="{% url 'personas:add' %}" class="btn btn-outline-primary">Nuevo</a>
+<a href="{% url 'personas:agregar_persona' %}" class="btn btn-outline-primary">Nuevo</a>
 {% endblock %}

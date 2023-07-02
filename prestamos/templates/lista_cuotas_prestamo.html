@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if cuotas %}
+<h1>Cuotas</h1>
+<div class="card-body">
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <th scope="col">Nro. cuota</th>
+                <th scope="col">Fecha Vencimiento</th>
+                <th scope="col">Monto Cuota</th>
+                <th scope="col">Saldo Cuota</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for cuota in cuotas %}
+            <tr>
+                <td>{{ cuota.nro_cuota }}</td>
+                <td>{{ cuota.fecha_vencimiento|date:"d/m/Y" }}</td>
+                <td>{{ cuota.monto_cuota }}</td>
+                <td>{{ cuota.saldo_cuota }}</td>
+                <td><a href="{% url 'pagos:pagar_cuota_por_id' cuota.id %}">
+                    <span class="material-icons md-dark green">paid</span>
+                    </a>
+                </td>
+                <td><a href="{% url 'prestamos:generar_pagare' cuota.id %}">
+                        <span class="material-icons">
+                            request_quote
+                        </span>
+                    </a>
+                </td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<p>No se ha encontrado ninguna información.</p>
+{% endif %}
+<a href="{% url 'prestamos:listar_prestamos' %}" class="btn btn-outline-secondary">Volver</a>
+<a href="{% url 'home:home' %}" class="btn btn-outline-primary">Nuevo</a>
+{% endblock %}

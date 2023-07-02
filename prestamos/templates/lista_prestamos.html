@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+
+{% if prestamos %}
+<h1>Préstamos</h1>
+<div class="card-body">
+    <table class="table table table-striped">
+        <thead>
+            <tr>
+                <th scope="col"> Nro. préstamo</th>
+                <th scope="col">Fecha préstamo</th>
+                <th scope="col">Cliente</th>
+                <th scope="col">Capital</th>
+                <th scope="col">Fecha primer Vto.</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for prestamo in prestamos %}
+            <tr>
+                <td><a href="{% url 'prestamos:listar_prestamo_por_id' prestamo.id %}">{{ prestamo.nro_prestamo }}</a></td>
+                <td>{{ prestamo.fecha|date:"d/m/Y" }}</td>
+                <td>{{ prestamo.persona }}</td>
+                <td>{{ prestamo.capital }}</td>
+                <td>{{ prestamo.fecha_primer_vencimiento|date:"d/m/Y" }}</td>
+            </tr>
+        </tbody>
+        {% endfor %}
+    </table>
+</div>
+{% else %}
+<p>No se ha encontrado ninguna información.</p>
+{% endif %}
+<a href="{% url 'prestamos:agregar_prestamo' %}" class="btn btn-outline-primary">Nuevo</a>
+{% endblock %}
