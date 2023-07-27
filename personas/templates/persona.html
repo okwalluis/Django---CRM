@@ -12,10 +12,10 @@
         <br />
         <div>
             <p class="card-text">
-                <strong>Razón social: </strong>{{ persona.razon_social }}
+                <strong>Tipo: </strong>{{ tipo}}
             </p>
             <p class="card-text">
-                <strong>Tipo: </strong>{{ tipo}}
+                <strong>Razón social: </strong>{{ persona.razon_social }}
             </p>
             <p class="card-text">
                 <strong>Sexo: </strong>{{ sexo}}
@@ -38,6 +38,21 @@
             </p>
         </div>
         <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-outline-success me-md-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDirecciones" aria-controls="offcanvasDirecciones">
+                Direcciones
+            </button>
+            <button class="btn btn-outline-success me-md-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasDocumentos" aria-controls="offcanvasDocumentos">
+                Documentos
+            </button>
+            <button class="btn btn-outline-success me-md-2" type="button" data-bs-toggle="offcanvas"
+                data-bs-target="#offcanvasTelefonos" aria-controls="offcanvasTelefonos">
+                Teléfonos
+            </button>
+        </div>
+
     </div>
 </div>
 
@@ -45,4 +60,5 @@
 <a href="{% url 'personas:listar_personas' %}" class="btn btn-outline-secondary">Volver</a>
 <a href="{% url 'personas:editar_persona' persona.id %}" class="btn btn-outline-primary">Editar</a>
 <a href="{% url 'personas:borrar_persona' persona.id %}" class="btn btn-outline-danger">Borrar</a>
+
 {% endblock %}

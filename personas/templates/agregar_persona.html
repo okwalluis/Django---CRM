@@ -1,5 +1,33 @@
 {% extends 'base.html' %}
 {% block content %}
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtiene el campo "tipo_persona" y "Razon social" del formulario
+        var tipoPersonaField = document.getElementById('id_tipo_persona');
+        var razonSocialField = document.getElementById('id_razon_social');
+        var sexoField = document.getElementById('id_sexo');
+
+
+        // Define una función para habilitar o deshabilitar el campo "Razon social" según el valor seleccionado en "tipo_persona"
+        function toggleRazonSocialField() {
+            if (tipoPersonaField.value === '1') { // 1 = persona física
+                razonSocialField.disabled = true;
+                razonSocialField.value = '';
+                sexoField.disabled = false;
+            } else {
+                razonSocialField.disabled = false;
+                sexoField.disabled = true;
+                sexoField.value = '';
+            }
+        }
+
+        // Llama a la función una vez al cargar la página para establecer el estado inicial del campo "Razon social"
+        toggleRazonSocialField();
+
+        // Agrega un evento de cambio al campo "tipo_persona" para activar la función cuando cambie el valor
+        tipoPersonaField.addEventListener('change', toggleRazonSocialField);
+    });
+</script>
 
 <div class="col-md-6 offset-md-3">
     <h1>Añadir persona</h1>

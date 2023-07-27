@@ -2,6 +2,11 @@
 
 {% block content %}
 
+<div class="input-group mb-3">
+    <input type="text" class="form-control" id="search-input" placeholder="Buscar por Nro. de prestamo.">
+    <button class="btn btn-outline-primary" id="search-button">Buscar</button>
+</div>
+ 
 
 {% if prestamos %}
 <h1>Préstamos</h1>
@@ -12,7 +17,7 @@
                 <th scope="col"> Nro. préstamo</th>
                 <th scope="col">Fecha préstamo</th>
                 <th scope="col">Cliente</th>
-                <th scope="col">Capital</th>
+                <th style="text-align: right;" scope="col">Capital</th>
                 <th scope="col">Fecha primer Vto.</th>
             </tr>
         </thead>
@@ -22,7 +27,7 @@
                 <td><a href="{% url 'prestamos:listar_prestamo_por_id' prestamo.id %}">{{ prestamo.nro_prestamo }}</a></td>
                 <td>{{ prestamo.fecha|date:"d/m/Y" }}</td>
                 <td>{{ prestamo.persona }}</td>
-                <td>{{ prestamo.capital }}</td>
+                <td style="text-align: right;">{{ prestamo.capital }}</td>
                 <td>{{ prestamo.fecha_primer_vencimiento|date:"d/m/Y" }}</td>
             </tr>
         </tbody>
@@ -33,4 +38,22 @@
 <p>No se ha encontrado ninguna información.</p>
 {% endif %}
 <a href="{% url 'prestamos:agregar_prestamo' %}" class="btn btn-outline-primary">Nuevo</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener elementos del DOM
+        var searchButton = document.getElementById('search-button');
+        var searchInput = document.getElementById('search-input');
+
+        // Agregar evento de clic al botón de búsqueda
+        searchButton.addEventListener('click', function (event) {
+            var searchString = searchInput.value.trim();
+            if (searchString !== '') {
+                var searchURL = "{% url 'prestamos:listar_prestamo_string' string='__search__' %}".replace('__search__', encodeURIComponent(searchString));
+                window.location.href = searchURL;
+            }
+        });
+    });
+</script>
+
 {% endblock %}

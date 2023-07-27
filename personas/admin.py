@@ -1,5 +1,5 @@
 from django.contrib import admin
-from .models import Persona, TipoPersona, Sexo, Direccion, Telefono
+from .models import Persona, TipoPersona, Sexo, Direccion, Telefono, TipoDocumento, Documento
 
 class PersonaAdmin(admin.ModelAdmin):
     fields = ["nombre", "apellido", 
@@ -19,11 +19,17 @@ class DireccionAdmin(admin.ModelAdmin):
 class TelefonoAdmin(admin.ModelAdmin):
     fields = ["persona","numero"]
 
-#admin.site.register(Question)
-#admin.site.register(Choice)
+class TipoDocumentoAdmin(admin.ModelAdmin):
+    fields = ["descripcion"]
+
+class DocumentoAdmin(admin.ModelAdmin):
+    fields = ["persona","numero"]
+
+
 admin.site.register(Persona, PersonaAdmin)
 admin.site.register(TipoPersona, TipoPersonaAdmin)
 admin.site.register(Sexo, SexoAdmin)
 admin.site.register(Direccion, DireccionAdmin)
 admin.site.register(Telefono, TelefonoAdmin)
-
+admin.site.register(TipoDocumento, TipoDocumentoAdmin)
+admin.site.register(Documento, DocumentoAdmin)

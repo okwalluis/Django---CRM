@@ -62,7 +62,7 @@ class Prestamo(models.Model):
     persona = models.ForeignKey(Persona, on_delete=models.PROTECT, null=True)
     sistema_prestamo = models.ForeignKey(SistemaPrestamo, on_delete=models.PROTECT, null=True)
     tipo_prestamo = models.ForeignKey(TipoPrestamo, on_delete=models.PROTECT, null=True)
-    capital = models.DecimalField(max_digits=12, decimal_places=2)
+    capital = models.DecimalField(max_digits=12, decimal_places=0)
     interes = models.FloatField() # TNA Tasa de interes anual Nominal
     frecuencia = models.ForeignKey(FrecuenciaPagoPrestamo, on_delete=models.PROTECT, null=True)
     plazo = models.IntegerField() # Nro. total de cuotas
@@ -101,3 +101,22 @@ class CuotaPrestamo(models.Model):
 
     class Meta:
         db_table = 'cuotas_prestamo'
+
+class EstadoCuentaPrestamo(models.Model):
+    persona_id = models.IntegerField()
+    nro_prestamo = models.IntegerField()
+    fecha = models.DateField()
+    nro_cuota = models.IntegerField()
+    fecha_vencimiento = models.DateField()
+    monto_cuota = models.DecimalField(max_digits=10, decimal_places=0)
+    saldo_cuota = models.DecimalField(max_digits=10, decimal_places=0)
+    fecha_pago = models.DateField()
+    cuota_actual_total = models.CharField(max_length=20)
+    monto_pago = models.DecimalField(max_digits=10, decimal_places=0)
+    acumulado_pago = models.DecimalField(max_digits=10, decimal_places=0)
+    saldo_actual = models.DecimalField(max_digits=10, decimal_places=0)
+    nro_pago = models.IntegerField()
+
+    class Meta:
+        managed = False
+        db_table = 'vw_estado_cuenta_prestamos'

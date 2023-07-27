@@ -17,13 +17,10 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{%url 'personas:listar_personas' %}">Personas</a></li>
-                        <li><a class="dropdown-item" href="#">Tipo de Personas</a></li>
-                        <li><a class="dropdown-item" href="#">Direcciones</a></li>
-                        <li><a class="dropdown-item" href="#">Teléfonos</a></li>
                         <li>
                             <hr class="dropdown-divider">
                         </li>
-                        <li><a class="dropdown-item" href="#">Pagarés</a></li>
+                        
                     </ul>
                 </li>
 
@@ -34,14 +31,16 @@
                     </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" href="{%url 'prestamos:listar_prestamos' %}">Préstamos</a></li>
-                        <li><a class="dropdown-item" href="#">Cuotas</a></li>
                         <li><a class="dropdown-item" href="#">Pagos</a></li>
                         <li><a class="dropdown-item" href="#">Pagarés</a></li>
-                        
                         <li><hr class="dropdown-divider"></li>
+                        <li><a class="dropdown-item" href="{%url 'prestamos:reporte_estado_cuenta' %}">Estado de Cuenta</a></li>
+                        
+                        <!-- 
                         
                         <li><a class="dropdown-item" href="#">Tipos de préstamo</a></li>
                         <li><a class="dropdown-item" href="#">Estados de préstamo</a></li>
+                        -->
                     </ul>
                 </li>
                 <li class="nav-item">

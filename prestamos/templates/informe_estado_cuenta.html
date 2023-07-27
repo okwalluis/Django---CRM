@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h1>Estado de Cuenta</h1>
+
+<div class="card-header">
+  <strong>
+    Cliente: {{persona.nombre}} {{persona.apellido}}
+  </strong>
+</div>
+
+<div class="card-body">
+  <table class="table table table-striped">
+    <thead>
+      <tr>
+        <th>Nro. Préstamo</th>
+        <th>Nro. cuota</th>
+        <th>Fecha Vencimiento</th>
+        <th style="text-align: right;">Monto Cuota</th>
+        <th>Nro. Pago</th>
+        <th style="text-align: right;">Monto Pago</th>
+        <th>Fecha Pago</th>
+        <th style="text-align: right;">Saldo Cuota</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for estado in estados %}
+      <tr>
+        <td>{{ estado.nro_prestamo }}</td>
+        <td>{{ estado.cuota_actual_total|intcomma }}</td>
+        <td>{{ estado.fecha_vencimiento|date:"d/m/Y" }}</td>
+        <td style="text-align: right;">{{ estado.monto_cuota|intcomma }}</td>
+        <td>
+          {% if estado.nro_pago is not None %}
+          {{ estado.nro_pago }}
+          {% endif %}
+        </td>
+        <td style="text-align: right;">{{ estado.monto_pago|intcomma }}</td>
+        <td>{{ estado.fecha_pago|date:"d/m/Y" }}</td>
+        <td style="text-align: right;">{{ estado.saldo_actual|intcomma }}</td>
+      </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+
+{% endblock %}

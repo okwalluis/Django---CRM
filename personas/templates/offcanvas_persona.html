@@ -1,0 +1,137 @@
+<!-- DIRECCIONES -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDirecciones"
+    aria-labelledby="offcanvasDireccionesLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDireccionesLabel">Direcciones</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Contenido del formulario de direcciones -->
+        <form method="post">
+            {% csrf_token %}
+            {{ direccion_form.as_p }}
+            <input type="hidden" name="persona" value="{{ persona.id }}">
+            <button type="submit" class="btn btn-primary" name="direccion_form_submit">Guardar</button>
+        </form>
+        <div>
+            {% if direcciones %}
+            <h1>Direcciones</h1>
+            <div class="card-body">
+                <table class="table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Dirección</th>
+                            <th scope="col">Predeterminada?</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for direccion in direcciones %}
+                        <tr>
+                            <td>{{ direccion.descripcion }}</td>
+                            <td>
+                                {% if direccion.por_defecto %}
+                                Sí
+                                {% else %}
+                                No
+                                {% endif %}
+                            </td>
+                            <td>
+                                <a href="{% url 'personas:borrar_direccion' direccion.id %}"
+                                    class="btn btn-outline-danger">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Offcanvas de documentos -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasDocumentos"
+    aria-labelledby="offcanvasDocumentosLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasDocumentosLabel">Documentos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Contenido del formulario de documentos -->
+        <form method="post">
+            {% csrf_token %}
+            {{ documento_form.as_p }}
+            <input type="hidden" name="persona" value="{{ persona.id }}">
+            <button type="submit" class="btn btn-primary" name="documento_form_submit">Guardar</button>
+        </form>
+        <div>
+            {% if documentos %}
+            <h1>Documentos</h1>
+            <div class="card-body">
+                <table class="table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Tipo</th>
+                            <th scope="col">Número</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for documento in documentos %}
+                        <tr>
+                            <td> {{ documento.tipo_documento }} </td>
+                            <td> {{ documento.numero }} </td>
+                            <td>
+                                <a href="{% url 'personas:borrar_documento' documento.id %}"
+                                    class="btn btn-outline-danger">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>
+
+<!-- Offcanvas de teléfonos -->
+<div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasTelefonos" aria-labelledby="offcanvasTelefonosLabel">
+    <div class="offcanvas-header">
+        <h5 class="offcanvas-title" id="offcanvasTelefonosLabel">Teléfonos</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Cerrar"></button>
+    </div>
+    <div class="offcanvas-body">
+        <!-- Contenido del formulario de direcciones -->
+        <form method="post">
+            {% csrf_token %}
+            {{ telefono_form.as_p }}
+            <input type="hidden" name="persona" value="{{ persona.id }}">
+            <button type="submit" class="btn btn-primary" name="telefono_form_submit">Guardar</button>
+        </form>
+        <div>
+            {% if telefonos %}
+            <h1>Teléfonos</h1>
+            <div class="card-body">
+                <table class="table table table-striped">
+                    <thead>
+                        <tr>
+                            <th scope="col">Número</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for telefono in telefonos %}
+                        <tr>
+                            <td>{{ telefono.numero }}</td>
+                            <td>
+                                <a href="{% url 'personas:borrar_telefono' telefono.id %}"
+                                    class="btn btn-outline-danger">Borrar</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+            {% endif %}
+        </div>
+    </div>
+</div>

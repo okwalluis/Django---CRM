@@ -2,6 +2,10 @@
 
 {% block content %}
 
+<div class="input-group mb-3">
+    <input type="text" class="form-control" id="search-input" placeholder="Buscar por nombre, apellido, etc.">
+    <button class="btn btn-outline-primary" id="search-button">Buscar</button>
+</div>
 
 {% if personas %}
 <h1>Personas</h1>
@@ -35,4 +39,22 @@
 <p>No se ha encontrado ninguna información.</p>
 {% endif %}
 <a href="{% url 'personas:agregar_persona' %}" class="btn btn-outline-primary">Nuevo</a>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        // Obtener elementos del DOM
+        var searchButton = document.getElementById('search-button');
+        var searchInput = document.getElementById('search-input');
+
+        // Agregar evento de clic al botón de búsqueda
+        searchButton.addEventListener('click', function (event) {
+            var searchString = searchInput.value.trim();
+            if (searchString !== '') {
+                var searchURL = "{% url 'personas:listar_persona_string' string='__search__' %}".replace('__search__', encodeURIComponent(searchString));
+                window.location.href = searchURL;
+            }
+        });
+    });
+</script>
+
 {% endblock %}

@@ -23,6 +23,10 @@ INSTALLED_APPS = [
     "pagos.apps.PagosConfig",
     "personas.apps.PersonasConfig",
     "prestamos.apps.PrestamosConfig",
+    "pagares.apps.PagaresConfig",
+    
+    
+    #"django.contrib.humanize",
     ##
     "users.apps.UsersConfig",
     "home.apps.HomeConfig",
@@ -60,6 +64,9 @@ TEMPLATES = [
                 "django.template.context_processors.request",
                 "django.contrib.auth.context_processors.auth",
                 "django.contrib.messages.context_processors.messages",
+            ],
+            'builtins': [
+                'django.contrib.humanize.templatetags.humanize',
             ],
         },
     },
@@ -113,14 +120,15 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/4.1/topics/i18n/
 
-#LANGUAGE_CODE = "en-us"
-LANGUAGE_CODE = 'es'
+USE_THOUSAND_SEPARATOR = True
+THOUSAND_SEPARATOR = '.'
+#LANGUAGE_CODE = "es" por los formateos de miles.
+LANGUAGE_CODE = 'en-us'
 
 TIME_ZONE = "America/Asuncion"
-
 USE_I18N = True
-
 USE_TZ = True
+USE_L10N = False
 
 
 

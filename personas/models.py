@@ -57,3 +57,24 @@ class Telefono(models.Model):
 
     def __str__(self):
         return f'{self.numero}'
+
+class TipoDocumento(models.Model):
+    descripcion = models.CharField(max_length=100)
+    activo = models.BooleanField(default=True)
+
+    class Meta:
+        db_table = 'tipos_documento'
+
+    def __str__(self):
+        return f'{self.descripcion}'
+    
+class Documento(models.Model):
+    tipo_documento = models.ForeignKey(TipoDocumento, on_delete=models.PROTECT)
+    persona = models.ForeignKey(Persona, on_delete=models.PROTECT)
+    numero = models.CharField(unique=True, null=False, max_length=30)
+
+    class Meta:
+        db_table = 'documentos'
+
+    def __str__(self):
+        return f'{self.numero}'

@@ -1,5 +1,4 @@
 {% extends 'base.html' %}
-
 {% block content %}
 
 
@@ -11,8 +10,8 @@
             <tr>
                 <th scope="col">Nro. cuota</th>
                 <th scope="col">Fecha Vencimiento</th>
-                <th scope="col">Monto Cuota</th>
-                <th scope="col">Saldo Cuota</th>
+                <th style="text-align: right;" scope="col">Monto Cuota</th>
+                <th style="text-align: right;" scope="col">Saldo Cuota</th>
             </tr>
         </thead>
         <tbody>
@@ -20,11 +19,16 @@
             <tr>
                 <td>{{ cuota.nro_cuota }}</td>
                 <td>{{ cuota.fecha_vencimiento|date:"d/m/Y" }}</td>
-                <td>{{ cuota.monto_cuota }}</td>
-                <td>{{ cuota.saldo_cuota }}</td>
-                <td><a href="{% url 'pagos:pagar_cuota_por_id' cuota.id %}">
-                    <span class="material-icons md-dark green">paid</span>
+                <td style="text-align: right;">{{ cuota.monto_cuota|intcomma }}</td>
+                <td style="text-align: right;">{{ cuota.saldo_cuota|intcomma }}</td>
+                <td>{% if cuota.saldo_cuota > 0 %}
+                    <a href="{% url 'pagos:pagar_cuota_por_id' cuota.id %}">
+                        <span class="material-icons md-dark green">paid</span>
                     </a>
+                    {% else %}
+                        <span class="material-icons md-dark green">paid</span>
+                    {% endif %}
+
                 </td>
                 <td><a href="{% url 'prestamos:generar_pagare' cuota.id %}">
                         <span class="material-icons">
@@ -41,5 +45,4 @@
 <p>No se ha encontrado ninguna información.</p>
 {% endif %}
 <a href="{% url 'prestamos:listar_prestamos' %}" class="btn btn-outline-secondary">Volver</a>
-<a href="{% url 'home:home' %}" class="btn btn-outline-primary">Nuevo</a>
 {% endblock %}
