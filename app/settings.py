@@ -20,16 +20,46 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-    "pagos.apps.PagosConfig",
-    "personas.apps.PersonasConfig",
-    "prestamos.apps.PrestamosConfig",
-    "pagares.apps.PagaresConfig",
+    # base
+    "base.ciudades",
+    "base.departamentos",
+    "base.empresas",
+    "base.historial_pagos",
+    "base.home",
+    "base.paises",
+    "base.personas",
+    "base.planes_suscripciones",
+    "base.sucursales",
+    "base.suscripciones",
+    "base.users",
+    # control de stock
+    "control_stock.clases_productos",
+    "control_stock.conversiones_medidas",
+    "control_stock.depositos",
+    "control_stock.existencias_stock",
+    "control_stock.familias",
+    "control_stock.grupos",
+    "control_stock.lotes",
+    "control_stock.movimientos_productos",
+    "control_stock.operaciones_stock",
+    "control_stock.productos",
+    "control_stock.tipos_productos",
+    "control_stock.unidades_medidas",
+    # erp
+    "erp.cotizaciones",
+    "erp.impuestos",
+    "erp.monedas",
+    "erp.movimientos",
+    "erp.tipos_comprobantes",
+    "erp.tipos_movimientos",
+    # financiero
+    "financiero.pagares",
+    "financiero.pagos",
+    "financiero.prestamos",
     
-    
-    #"django.contrib.humanize",
     ##
-    "users.apps.UsersConfig",
-    "home.apps.HomeConfig",
+    #"users.apps.UsersConfig",
+    #"home.apps.HomeConfig",
     ##
     "django.contrib.admin",
     "django.contrib.auth",
@@ -89,7 +119,7 @@ DATABASES = {
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
-        'NAME': 'owndb',
+        'NAME': 'own_erp',
         'USER': 'own',
         'PASSWORD': 'own',
         'HOST':'localhost',
