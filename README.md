@@ -50,3 +50,7 @@ git push -u origin main
 git add .
 git commit -am "<comentario>"
 git push
+
+## Ver ramas
+git remote -v
+git remote show origin
